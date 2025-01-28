@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Trend Sans One';
+  src: url('./import-font/Trend-Sans-One-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Trend Sans Five';
+  src: url('./import-font/FontsFree-Net-Trend-Sans-W00-Five.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  background-color: #141313;
+  color: white;
+  font-family: 'Trend Sans One','Trend Sans Five', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

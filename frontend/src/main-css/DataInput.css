@@ -1,0 +1,100 @@
+/* Container styling */
+  .data-input {
+    position: fixed; 
+    top: 55%; 
+    right: 200px; 
+    transform: translateY(-30%); 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    color: white;
+    z-index: 1000;
+  }
+  /* Upload button container */
+  .upload-section {
+    position: sticky; /* Keep button in view while scrolling */
+    top: 0;
+    z-index: 10;
+    background: inherit; /* Match parent background */
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the button */
+  }
+  
+  /* Custom upload button */
+  .custom-upload-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #ffa500, #ff4500);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 55px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.8);
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Hover effect */
+  .custom-upload-button:hover {
+    box-shadow: 0 0 30px rgba(255, 165, 0, 1);
+  }
+  
+  /* Hide the default file input */
+  .hidden-file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Uploaded file details */
+  .uploaded-files {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 25px;
+    max-height: 300px;
+  }
+  
+  .file-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    color: white;
+  }
+
+  /* WebKit Custom Scrollbar */
+  .uploaded-files::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .uploaded-files::-webkit-scrollbar-thumb {
+    background-color: #9f9a86;
+    border-radius: 8px;
+  }
+  
+  .uploaded-files::-webkit-scrollbar-track {
+    background-color: #3b3a3b;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  

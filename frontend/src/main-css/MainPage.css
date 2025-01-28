@@ -1,0 +1,92 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-y: auto;
+  }
+  
+  .main-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle, rgba(73, 71, 73, 0.2), rgba(0, 0, 0, 1));
+    color: white;
+    margin: 0;
+    position: relative;
+    flex-grow: 1;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    flex-direction: row; /* Side-by-side layout */
+    gap: 20px;
+    justify-content: center; /* Center content horizontally */
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+  }
+  
+  .main-content {
+    text-align: center; /* Center text */
+    padding: 80px 50px;
+    color: #ffffff;
+    width: calc(100% - min(550px, 30%)); /* Adjust width for content */
+    box-sizing: border-box;
+  }
+  
+  .tagline {
+    font-size: clamp(40px, 8vw, 100px);
+    font-weight: bold;
+    font-family: 'Trend Sans One', sans-serif;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 15px;
+  }
+  
+  .subtitle {
+    font-size: clamp(1rem, 3vw, 1.7rem);
+    font-family: 'Trend Sans One', sans-serif;
+    margin: 0;
+    color: #edcc13;
+  }
+  
+  /* Header Section */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the text and logo horizontally */
+    position: absolute; /* Position it at the top of the page */
+    top: 0;
+    width: 100%;
+    padding: 20px 0;
+  }
+  
+  .header img {
+    height: 170px; /* Adjust as needed */
+    width: auto;
+    margin-top: 15px;
+    margin-left: 10px; /* Space between logo and text */
+  }
+  
+  .header .header-text {
+    text-align: center; /* Ensures the text is centered */
+  }
+  
+
+  
+  /* WebKit Custom Scrollbar */
+  body::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #9f9a86;
+    border-radius: 8px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background-color: #3b3a3b;
+    margin-top: 80px;
+    margin-bottom: 30px;
+  }
+  
