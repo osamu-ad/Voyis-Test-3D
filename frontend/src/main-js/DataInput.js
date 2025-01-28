@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../main-css/DataInput.css";
 import * as THREE from 'three';
+import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader';
 import geojsonValidation from "geojson-validation";
 
 
@@ -44,69 +45,30 @@ const DataInput = () => {
         }
         // Basic parsing for .pcd files would require more complex parsing
         else if (file.name.endsWith('.pcd')) {
-          try {
-            const lines = content.split('\n');
-            const header = {};
-            let headerLength = 0;
-            
-            // Parse header
-            while (headerLength < lines.length) {
-              const line = lines[headerLength].trim();
-              if (line === 'DATA ascii') {
-                headerLength++;
-                break;
-              }
-              
-              const [key, ...valueParts] = line.split(/\s+/);
-              header[key] = valueParts.join(' ');
-              headerLength++;
+          // Handle .pcd files using three-pcd-loader
+          const url = URL.createObjectURL(file); // Create a temporary URL for the file
+          const loader = new PCDLoader();
+    
+          loader.load(
+            url,
+            (points) => {
+              const geometry = points.geometry;
+              geometry.computeBoundingBox();
+    
+              resolve({
+                pointCount: geometry.attributes.position.count,
+                boundingBox: geometry.boundingBox,
+                object: points, // Full THREE.Points object if needed
+              });
+    
+              URL.revokeObjectURL(url); // Clean up the temporary URL
+            },
+            undefined,
+            (error) => {
+              reject(new Error(`Failed to parse PCD file: ${error.message}`));
             }
-            
-            // Validate required header fields
-            const requiredFields = ['VERSION', 'FIELDS', 'SIZE', 'TYPE', 'COUNT', 'WIDTH', 'HEIGHT', 'VIEWPOINT', 'POINTS'];
-            for (const field of requiredFields) {
-              if (!(field in header)) {
-                throw new Error(`Missing required PCD header field: ${field}`);
-              }
-            }
-            
-            // Parse point data
-            const fields = header.FIELDS.split(/\s+/);
-            const points = [];
-            
-            for (let i = headerLength; i < lines.length; i++) {
-              const line = lines[i].trim();
-              if (!line) continue;
-              
-              const values = line.split(/\s+/).map(parseFloat);
-              
-              // Find x, y, z indices in fields
-              const xIndex = fields.indexOf('x');
-              const yIndex = fields.indexOf('y');
-              const zIndex = fields.indexOf('z');
-              
-              if (xIndex !== -1 && yIndex !== -1 && zIndex !== -1) {
-                points.push(new THREE.Vector3(
-                  values[xIndex],
-                  values[yIndex],
-                  values[zIndex]
-                ));
-              }
-            }
-            
-            const geometry = new THREE.BufferGeometry().setFromPoints(points);
-            geometry.computeBoundingBox();
-            
-            resolve({
-              pointCount: points.length,
-              boundingBox: geometry.boundingBox,
-              header: header
-            });
-          } catch (error) {
-            reject(new Error(`PCD parsing failed: ${error.message}`));
-          }
-        }
-        else {
+          );
+        } else {
           resolve(null);
         }
       };
@@ -235,28 +197,28 @@ const DataInput = () => {
 
   return (
     <div className="data-input p-4">
-  <div className="upload-section">
-    <label className="custom-upload-button">
-      Upload Files
-      <input
-        type="file"
-        accept=".xyz,.pcd,.geojson"
-        multiple
-        onChange={handleFileUpload}
-        className="hidden-file-input"
-      />
-    </label>
-    <p>Files Must Be .xyz, .pcd, or .geojson!</p>
-  </div>
-  <div className="uploaded-files">
-    <h3 className="text-lg font-semibold">Uploaded Files:</h3>
-    {uploadedFiles.length > 0 ? (
-      uploadedFiles.map(renderFileDetails)
-    ) : (
-      <p>No files uploaded yet.</p>
-    )}
-  </div>
-</div>
+      <div className="upload-section">
+        <label className="custom-upload-button">
+          Upload Files
+          <input
+            type="file"
+            accept=".xyz,.pcd,.geojson"
+            multiple
+            onChange={handleFileUpload}
+            className="hidden-file-input"
+          />
+        </label>
+        <p>Files Must Be Under 450MB & .xyz, .pcd, or .geojson!</p>
+      </div>
+      <div className="uploaded-files">
+        <h3 className="text-lg font-semibold">Uploaded Files:</h3>
+        {uploadedFiles.length > 0 ? (
+          uploadedFiles.map(renderFileDetails)
+        ) : (
+          <p>No files uploaded yet.</p>
+        )}
+      </div>
+    </div>
   );
 };
 

@@ -63,6 +63,7 @@
   /* Uploaded file details */
   .uploaded-files {
     margin-top: 20px;
+    margin-left: 120px;
     font-size: 1.5rem;
     overflow-y: auto;
     overflow-x: hidden;
