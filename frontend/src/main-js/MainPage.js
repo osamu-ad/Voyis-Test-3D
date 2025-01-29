@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import DataInput from "./DataInput.js"; 
+import DataViewer from "./DataViewer.js"; 
 import "../main-css/MainPage.css";
 
 /**
@@ -7,6 +8,9 @@ import "../main-css/MainPage.css";
  * The main entry point for the application UI, hosting other components like DataInput.
  */
 const MainPage = () => {
+  const [pointCloudData, setPointCloudData] = useState([]);
+
+
   return (
     <div className="main-wrapper">
       {/* Header Section */}
@@ -21,7 +25,8 @@ const MainPage = () => {
       {/* Content Section */}
       <main className="content-wrapper">
         <div className="main-content">
-          <DataInput />
+          <DataViewer pointCloudData={pointCloudData} />
+          <DataInput setPointCloudData={setPointCloudData} />
         </div>
       </main>
     </div>

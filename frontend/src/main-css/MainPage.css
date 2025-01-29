@@ -2,6 +2,7 @@ html, body {
     height: 100%;
     margin: 0;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   
   .main-wrapper {
@@ -90,3 +91,83 @@ html, body {
     margin-bottom: 30px;
   }
   
+  /* Mobile devices (max-width: 600px) */
+@media screen and (max-width: 600px) {
+  .main-wrapper {
+    flex-direction: column; /* Stack content vertically */
+  }
+
+  .content-wrapper {
+    flex-direction: column; /* Stack content vertically */
+    gap: 10px; /* Reduce spacing */
+    align-items: center; /* Center content on smaller screens */
+  }
+
+  .main-content {
+    padding: 40px 20px; /* Reduce padding */
+    width: 90%; /* Make content more flexible */
+  }
+
+  .tagline {
+    font-size: clamp(30px, 6vw, 50px); /* Smaller font for mobile */
+  }
+
+  .subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem); /* Adjust font size for readability */
+  }
+
+  .header {
+    flex-direction: column; /* Stack logo and text */
+    padding: 15px 0;
+  }
+
+  .header img {
+    height: 100px; /* Smaller logo for mobile */
+  }
+}
+
+/* Tablets (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+  .content-wrapper {
+    flex-direction: column; /* Stack content */
+    gap: 15px; /* Slightly smaller spacing */
+    align-items: center;
+  }
+
+  .main-content {
+    padding: 60px 30px; /* Adjust padding for tablets */
+    width: 80%; /* Reduce width slightly */
+  }
+
+  .tagline {
+    font-size: clamp(35px, 7vw, 80px); /* Slightly smaller font */
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 2.8vw, 1.5rem); /* Adjust subtitle size */
+  }
+
+  .header img {
+    height: 130px; /* Scale logo for tablets */
+  }
+
+}
+
+/* Large screens (min-width: 1200px) */
+@media screen and (min-width: 1200px) {
+  .main-content {
+    width: calc(100% - min(600px, 35%)); /* Adjust width for larger screens */
+  }
+
+  .tagline {
+    font-size: clamp(50px, 6vw, 120px); /* Larger font size */
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem); /* Larger subtitles */
+  }
+
+  .header img {
+    height: 200px; /* Larger logo for big screens */
+  }
+}
