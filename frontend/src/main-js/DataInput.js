@@ -17,7 +17,7 @@ import "../main-css/DataInput.css";
  */
 const MAX_FILE_SIZE = 450 * 1024 * 1024; // 450 MB
 
-const DataInput = ({ setPointCloudData }) => {
+const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
   // State to store uploaded files
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileMetadata, setFileMetadata] = useState({});
@@ -106,7 +106,8 @@ const DataInput = ({ setPointCloudData }) => {
           if (!geojsonValidation.valid(geoJSON)) {
             throw new Error("Invalid GeoJSON format");
           }
-  
+          
+          setGeoJsonData(geoJSON);
           resolve(true);
         } catch (error) {
           console.error("GeoJSON validation error:", error);

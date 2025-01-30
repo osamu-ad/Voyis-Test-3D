@@ -9,6 +9,7 @@ import "../main-css/MainPage.css";
  */
 const MainPage = () => {
   const [pointCloudData, setPointCloudData] = useState([]);
+  const [geoJsonData, setGeoJsonData] = useState(null);
 
 
   return (
@@ -25,8 +26,8 @@ const MainPage = () => {
       {/* Content Section */}
       <main className="content-wrapper">
         <div className="main-content">
-          <DataViewer pointCloudData={pointCloudData} />
-          <DataInput setPointCloudData={setPointCloudData} />
+          <DataViewer pointCloudData={pointCloudData} geoJsonData={geoJsonData} />
+          <DataInput setPointCloudData={setPointCloudData} setGeoJsonData={setGeoJsonData} />
         </div>
       </main>
     </div>
