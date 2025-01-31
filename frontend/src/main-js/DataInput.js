@@ -13,9 +13,9 @@ import "../main-css/DataInput.css";
  * - Allows multiple file uploads.
  * - Accepts specific file types (.xyz, .pcd, .geojson).
  * - Displays details of uploaded files such as filename, size, and type.
- * - Returns Point Cloud Data for Data Viewer to Display
+ * - Returns Point Cloud Data & GeoJSON for Data Viewer to Display
  */
-const MAX_FILE_SIZE = 450 * 1024 * 1024; // 450 MB
+const MAX_FILE_SIZE = 250 * 1024 * 1024; // 250 MB
 
 const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
   // State to store uploaded files

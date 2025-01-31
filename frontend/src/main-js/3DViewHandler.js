@@ -3,6 +3,17 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
 import _ from "lodash";
 
+/**
+ * ThreeDViewHandler Class
+ * Handles rendering and interaction for a 3D point cloud visualization using Three.js.
+ * 
+ * Functionalities:
+ * - Initializes a Three.js scene, camera, renderer, and controls.
+ * - Loads point cloud data and renders it as a set of points.
+ * - Supports dynamic resizing and interactive camera controls.
+ * - Allows toggling color by altitude and adjusting point sizes.
+ * - Centers the object in the viewport smoothly using GSAP animations.
+ */
 export default class ThreeDViewHandler {
     constructor(canvas, pointCloudData) {
         this.canvas = canvas;
@@ -16,6 +27,10 @@ export default class ThreeDViewHandler {
         this.init();
     }
 
+    /**
+     * Initializes the Three.js scene, camera, renderer, and controls.
+     * Also sets up event listeners for window resizing.
+     */
     init() {
         if (!this.canvas) return;
 
@@ -53,6 +68,7 @@ export default class ThreeDViewHandler {
             const colors = new Float32Array(data.points.length * 3);
             let minZ = Infinity, maxZ = -Infinity;
 
+            // Process each point and extract position data
             data.points.forEach((point, i) => {
                 const baseIndex = i * 3;
                 positions[baseIndex] = point.x;
@@ -65,10 +81,12 @@ export default class ThreeDViewHandler {
             this.zRange[index] = { minZ, maxZ };
             colors.fill(1);
 
+            // Create a buffer geometry and assign position & color attributes
             const geometry = new THREE.BufferGeometry();
             geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
             geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
 
+            // Create a material for the point cloud
             const material = new THREE.PointsMaterial({ size: 0.05, vertexColors: true, sizeAttenuation: true });
             const pointCloud = new THREE.Points(geometry, material);
             this.scene.add(pointCloud);
