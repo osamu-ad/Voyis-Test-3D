@@ -16,7 +16,7 @@ const MainPage = () => {
     <div className="main-wrapper">
       {/* Header Section */}
       <header className="header">
-      <img src="./images/voyis-logo.png" alt="Voyis Logo" />
+      <img src="/images/voyis-logo.png" alt="Voyis Logo" />
         <div className="header-text">
           <h1 className="tagline">Voyis 3D Viewer</h1>
           <h2 className="subtitle">3D Data Viewer with GIS Integration</h2>

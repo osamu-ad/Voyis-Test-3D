@@ -22,6 +22,7 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileMetadata, setFileMetadata] = useState({});
   const [loading, setLoading] = useState(false);
+  const allowedFiles = ['xyz', 'pcd', 'geojson'];
   
   //Parse Point Cloud Data
   const parsePointCloudFile = (file) => {
@@ -190,6 +191,10 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
       };
       
       try {
+        if (!allowedFiles.includes(fileInfo.type)){
+          alert(`Invalid file type: ${file.name}. Only .xyz, .pcd, and .geojson files are allowed.`);
+          return false;
+        }
         //#region Basic Checks
         if (file.size === 0) {
           alert(`File is empty: ${fileInfo.name}.`);
