@@ -7,25 +7,25 @@
 
 .data-viewer-container {
   width: 48vw;
-  height: calc(100vh - 360px);
+  height: calc(100vh - 320px);
   background-color: #480a5f;
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   margin-left: -305px;
-  margin-top: 230px;
+  margin-top: 220px;
   position: relative;
 }
 
 .viewer-content {
   height: 100%;
-  background-color: #3d0057;
+   background: linear-gradient(90deg, #4d6ec8c6, #d66363);
   border-radius: 10px;
   overflow: hidden;
 }
 
 .control-panel {
   position: absolute;
-  top: -40px;
+  top: -50px;
   left: 0;
   width: 50%;
   height: 35px;
@@ -39,12 +39,19 @@
 
 .control-panel button {
   padding: 5px 10px;
-  background-color: #a57909;
+  background: linear-gradient(90deg, #4d6ec8c6, #d66363);
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 12px;
+  font-weight: bold;
+}
+.control-panel button:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .control-panel label {
@@ -64,7 +71,7 @@
   .data-viewer-container {
       width: 80vw;
       margin-left: 0;
-      margin-top: 100px;
+      margin-top: 850px; /* Push down below Data Input */
   }
 }
 
@@ -76,11 +83,12 @@
   .data-viewer-container {
       width: 90vw;
       height: calc(100vh - 200px);
-      margin-top: 50px;
+      margin-top: 820px; /* Increase margin to ensure space below Data Input */
   }
   .control-panel {
       width: 80%;
       top: -30px;
+      margin-top:-15px;
   }
 }
 
@@ -88,6 +96,7 @@
   .data-viewer-container {
       width: 95vw;
       height: calc(100vh - 150px);
+      margin-top: 100px; /* Add margin-top for mobile devices */
   }
   .control-panel {
       width: 100%;
@@ -103,5 +112,6 @@
       width: 80px;
   }
 }
+
 
   

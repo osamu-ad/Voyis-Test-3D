@@ -28,24 +28,25 @@ html, body {
   }
   
   .main-content {
+    position: relative;
     text-align: center; /* Center text */
-    padding: 80px 50px;
+    padding: 80px 80px;
     color: #ffffff;
     width: calc(100% - min(550px, 30%)); /* Adjust width for content */
     box-sizing: border-box;
   }
   
   .tagline {
-    font-size: clamp(40px, 8vw, 100px);
+    font-size: clamp(30px, 6vw, 80px);
     font-weight: bold;
     font-family: 'Trend Sans One', sans-serif;
     color: #ffffff;
-    line-height: 1.1;
+    line-height: 0.7;
     margin-bottom: 15px;
   }
   
   .subtitle {
-    font-size: clamp(1rem, 3vw, 1.7rem);
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
     font-family: 'Trend Sans One', sans-serif;
     margin: 0;
     color: #edcc13;
@@ -63,7 +64,7 @@ html, body {
   }
   
   .header img {
-    height: 170px; /* Adjust as needed */
+    height: 130px; /* Adjust as needed */
     width: auto;
     margin-top: 15px;
     margin-left: 10px; /* Space between logo and text */
@@ -90,6 +91,34 @@ html, body {
     margin-top: 80px;
     margin-bottom: 30px;
   }
+
+
+/* Tablets (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+  .content-wrapper {
+    flex-direction: column; /* Stack content */
+    gap: 15px; /* Slightly smaller spacing */
+    align-items: center;
+  }
+
+  .main-content {
+    padding: 60px 30px; /* Adjust padding for tablets */
+    width: 80%; /* Reduce width slightly */
+  }
+
+  .tagline {
+    font-size: clamp(35px, 7vw, 80px); /* Slightly smaller font */
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 2.8vw, 1.5rem); /* Adjust subtitle size */
+  }
+
+  .header img {
+    height: 130px; /* Scale logo for tablets */
+  }
+
+}
   
   /* Mobile devices (max-width: 600px) */
 @media screen and (max-width: 600px) {
@@ -126,48 +155,6 @@ html, body {
   }
 }
 
-/* Tablets (max-width: 1024px) */
-@media screen and (max-width: 1024px) {
-  .content-wrapper {
-    flex-direction: column; /* Stack content */
-    gap: 15px; /* Slightly smaller spacing */
-    align-items: center;
-  }
 
-  .main-content {
-    padding: 60px 30px; /* Adjust padding for tablets */
-    width: 80%; /* Reduce width slightly */
-  }
 
-  .tagline {
-    font-size: clamp(35px, 7vw, 80px); /* Slightly smaller font */
-  }
 
-  .subtitle {
-    font-size: clamp(1rem, 2.8vw, 1.5rem); /* Adjust subtitle size */
-  }
-
-  .header img {
-    height: 130px; /* Scale logo for tablets */
-  }
-
-}
-
-/* Large screens (min-width: 1200px) */
-@media screen and (min-width: 1200px) {
-  .main-content {
-    width: calc(100% - min(600px, 35%)); /* Adjust width for larger screens */
-  }
-
-  .tagline {
-    font-size: clamp(50px, 6vw, 120px); /* Larger font size */
-  }
-
-  .subtitle {
-    font-size: clamp(1.2rem, 3vw, 2rem); /* Larger subtitles */
-  }
-
-  .header img {
-    height: 200px; /* Larger logo for big screens */
-  }
-}

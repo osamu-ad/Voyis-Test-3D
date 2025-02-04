@@ -1,28 +1,29 @@
-/* Container styling */
+  /* Container styling */
   .data-input {
-    position: fixed; 
-    top: 50%; 
-    right: 200px; 
-    transform: translateY(-30%); 
+    position: absolute; 
+    top: 45%; 
+    transform: translateY(-30%) translateX(30%); 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Change to center */
     gap: 20px;
     padding: 20px;
     color: white;
     z-index: 1000;
+    width: 100%; /* Add full width */
+    max-width: 500px; 
   }
+
   /* Upload button container */
   .upload-section {
-    position: sticky; /* Keep button in view while scrolling */
-    top: 0;
+    position: relative; 
     z-index: 10;
-    background: inherit; /* Match parent background */
-    padding: 20px 0;
+    background: inherit;
+    padding: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the button */
+    align-items: center;
   }
   
   /* Custom upload button */
@@ -47,6 +48,7 @@
   /* Hover effect */
   .custom-upload-button:hover {
     box-shadow: 0 0 30px rgba(255, 165, 0, 1);
+    transform: translateY(-2px); 
   }
   
   /* Hide the default file input */
@@ -62,13 +64,18 @@
   
   /* Uploaded file details */
   .uploaded-files {
+    position: relative;
     margin-top: -50px;
-    margin-left: 100px;
+    right: 0; /* Remove right positioning */
     font-size: 1.5rem;
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 25px;
     max-height: 250px;
+    width: 100%; /* Ensure full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align */
   }
   
   .file-details {
@@ -147,37 +154,33 @@
     margin-top: 30px;
     margin-bottom: 10px;
   }
-  
-  /* Mobile devices (max-width: 600px) */
-@media screen and (max-width: 600px) {
+
+/* Large screens (min-width: 1200px) */
+@media screen and (min-width: 1200px) {
   .data-input {
-    top: auto; /* Remove fixed positioning for better usability */
-    right: 10px; /* Reduce spacing */
-    transform: none;
-    width: calc(100% - 20px); /* Use most of the screen width */
-    padding: 10px;
+    right: 0; 
+    transform: translateY(-30%) translateX(35%);
+    padding: 25px;
   }
 
   .custom-upload-button {
-    font-size: 1.5rem; /* Smaller button text */
-    padding: 8px 15px;
-    border-radius: 20px;
+    font-size: 2.2rem;
+    padding: 15px 30px;
   }
 
   .uploaded-files {
-    margin-left: 0; /* Align with mobile layout */
-    font-size: 1.2rem;
-    max-height: 200px; /* Reduce height for smaller screens */
+    font-size: 1.6rem;
+    max-height: 400px;
   }
 }
 
 /* Tablets (max-width: 1024px) */
 @media screen and (max-width: 1024px) {
   .data-input {
-    top: 55%; /* Keep fixed positioning but adjust size */
-    right: 20px;
+    top: 55%;
+    right: 0; /* Center */
     transform: translateY(-50%);
-    width: auto; /* Default to content size */
+    width: auto;
     padding: 15px;
   }
 
@@ -192,20 +195,28 @@
   }
 }
 
-/* Large screens (min-width: 1200px) */
-@media screen and (min-width: 1200px) {
+/* Mobile devices (max-width: 600px) */
+@media screen and (max-width: 600px) {
   .data-input {
-    right: 250px; /* Larger margin */
-    padding: 25px;
+    top: 250px;
+    right: 0; /* Center */
+    transform: none;
+    width: calc(100% - 20px);
+    padding: 10px;
   }
 
   .custom-upload-button {
-    font-size: 2.2rem; /* More prominent button */
-    padding: 15px 30px;
+    font-size: 1.5rem;
+    padding: 8px 15px;
+    border-radius: 20px;
   }
 
   .uploaded-files {
-    font-size: 1.6rem;
-    max-height: 400px; /* Increase max height */
+    margin-left: 0;
+    font-size: 1.2rem;
+    max-height: 200px;
   }
 }
+
+
+

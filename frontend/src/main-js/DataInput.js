@@ -234,7 +234,6 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
               ...prev,
               [file.name]: metadata
             }));
-            console.log(metadata);
             newPointCloudData.push(metadata);
           }
         }    
@@ -282,7 +281,7 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
   };
 
   return (
-    <div className="data-input p-4">
+    <div className="data-input">
       <div className="upload-section">
         <label className="custom-upload-button">
           Upload Files

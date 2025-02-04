@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DataInput from "./DataInput.js"; 
 import DataViewer from "./DataViewer.js"; 
 import "../main-css/MainPage.css";
+import voyisLogo from "../assets/voyis-logo.png";
+
 
 /**
  * MainPage Component
@@ -16,7 +18,7 @@ const MainPage = () => {
     <div className="main-wrapper">
       {/* Header Section */}
       <header className="header">
-      <img src="/images/voyis-logo.png" alt="Voyis Logo" />
+      <img src={voyisLogo} alt="Voyis Logo" />
         <div className="header-text">
           <h1 className="tagline">Voyis 3D Viewer</h1>
           <h2 className="subtitle">3D Data Viewer with GIS Integration</h2>

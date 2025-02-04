@@ -15,6 +15,7 @@ import _ from "lodash";
  * - Centers the object in the viewport smoothly using GSAP animations.
  */
 export default class ThreeDViewHandler {
+    
     constructor(canvas, pointCloudData) {
         this.canvas = canvas;
         this.pointCloudData = pointCloudData;
@@ -58,7 +59,7 @@ export default class ThreeDViewHandler {
         // Handle Resize
         this.handleResize = _.debounce(() => this.onResize(), 250);
         window.addEventListener("resize", this.handleResize);
-    }
+    };
 
     loadPointClouds() {
         if (!this.pointCloudData) return;
@@ -93,19 +94,19 @@ export default class ThreeDViewHandler {
 
             return pointCloud;
         });
-    }
+    };
 
     animate() {
         requestAnimationFrame(() => this.animate());
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
-    }
+    };
 
     onResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
-    }
+    };
 
     updatePointSize(size) {
         this.pointClouds.forEach(pointCloud => {
@@ -114,7 +115,7 @@ export default class ThreeDViewHandler {
                 pointCloud.material.needsUpdate = true;
             }
         });
-    }
+    };
 
     toggleColorByAltitude(enable) {
         this.pointClouds.forEach((pointCloud, index) => {
@@ -140,36 +141,79 @@ export default class ThreeDViewHandler {
             }
             pointCloud.geometry.attributes.color.needsUpdate = true;
         });
-    }
+    };
 
     centerObject() {
-        if (!this.pointClouds.length) return;
-
+        console.trace("po");
+        if (!this.pointClouds.length) {
+            console.log("No point clouds found");  // Log this case
+            return;
+        }
+        console.log("op");
+        // Compute bounding box of all point clouds
         const boundingBox = new THREE.Box3().setFromObject(this.pointClouds[0]);
         this.pointClouds.forEach(pc => boundingBox.expandByObject(pc));
-
+    
+        // Get the center and size of the bounding box
         const center = boundingBox.getCenter(new THREE.Vector3());
         const size = boundingBox.getSize(new THREE.Vector3());
         const maxDimension = Math.max(size.x, size.y, size.z);
+    
+        // Debugging log
+        console.log('Center:', center);
+        console.log('Bounding Box Size:', size);
+        console.log('Max Dimension:', maxDimension);
+    
+        // Camera positioning logic
         const distance = maxDimension * 2;
         const cameraPosition = new THREE.Vector3(center.x, center.y, center.z + distance);
-        const offsetX = +maxDimension * 15.5;
-
-        gsap.to(this.controls.target, { 
+    
+        // Dynamic offset based on size or other logic
+        const offsetX = maxDimension * 1.5;  // Try smaller dynamic offset for closer zoom
+    
+        // Debugging the camera position
+        console.log('Camera Position:', cameraPosition);
+        console.log('Controls Target:', this.controls.target);
+    
+        // Animate controls target and camera position with GSAP
+        gsap.to(this.controls.target, {
             x: center.x + offsetX,
-            y: center.y, 
+            y: center.y,
             z: center.z,
             duration: 1.5,
-            ease: "power2.inOut" 
+            ease: "power2.inOut"
         });
-
+    
         gsap.to(this.camera.position, {
             x: cameraPosition.x,
             y: cameraPosition.y,
             z: cameraPosition.z,
             duration: 1.5,
             ease: "power2.inOut",
-            onUpdate: () => this.controls.update()
+            onUpdate: () => this.controls.update()  // Update controls during animation
         });
+    }
+    
+    // Cleanup method for switching between views
+    dispose() {
+        // Remove all objects from the scene
+        this.scene.children.forEach(child => {
+            if (child instanceof THREE.Mesh || child instanceof THREE.Points) {
+                child.geometry.dispose();
+                child.material.dispose();
+            }
+            this.scene.remove(child);
+        });
+
+        // Dispose of the renderer
+        this.renderer.dispose();
+
+        // Dispose of controls
+        if (this.controls) {
+            this.controls.dispose();
+        }
+
+        // Remove event listeners
+        window.removeEventListener("resize", this.handleResize);
     }
 }

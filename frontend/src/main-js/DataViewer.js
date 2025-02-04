@@ -15,18 +15,32 @@ import "../main-css/DataViewer.css";
  */
 const DataViewer = ({ pointCloudData, geoJsonData }) => {
     const canvasRef = useRef(null);
-    const [is3DView, setIs3DView] = useState(true);
+    const [is3DView, setIs3DView] = useState(false);
     const [viewer, setViewer] = useState(null);
     const [pointSize, setPointSize] = useState(0.05);
     const [colorByAltitude, setColorByAltitude] = useState(false);
 
     useEffect(() => {
-        if (canvasRef.current) {
-            // Initialize 3D viewer when pointCloudData is available
+        // Only initialize the viewer if we're in 3D view and there's no existing viewer
+        if (canvasRef.current && is3DView && pointCloudData) {
+            viewer?.dispose();
+            setViewer(null);
             const newViewer = new ThreeDViewHandler(canvasRef.current, pointCloudData);
             setViewer(newViewer);
+        } 
+        // If switching to 2D, clean up the viewer
+        else if (!is3DView && viewer) {
+            viewer.dispose();
+            setViewer(null);
         }
-    }, [pointCloudData]);
+    
+        // Cleanup the viewer when the component unmounts
+        return () => {
+            if (viewer) {
+                viewer.dispose();
+            }
+        };
+    }, [is3DView, pointCloudData]); // Only trigger when the view mode or point cloud data changes
 
     // Updates the point size in the 3D viewer
     const handlePointSizeChange = (e) => {
