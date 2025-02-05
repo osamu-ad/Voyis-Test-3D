@@ -18,7 +18,6 @@ import "../main-css/DataInput.css";
 const MAX_FILE_SIZE = 250 * 1024 * 1024; // 250 MB
 
 const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
-  // State to store uploaded files
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileMetadata, setFileMetadata] = useState({});
   const [loading, setLoading] = useState(false);
