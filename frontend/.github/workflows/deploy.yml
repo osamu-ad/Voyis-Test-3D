@@ -34,4 +34,5 @@ jobs:
           branch: gh-pages  # Deploy to the gh-pages branch
           folder: frontend/build  # Specify the build folder inside frontend
           clean: true
+          force: true
 
