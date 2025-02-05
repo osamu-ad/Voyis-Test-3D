@@ -13,6 +13,7 @@ import _ from "lodash";
  * - Supports dynamic resizing and interactive camera controls.
  * - Allows toggling color by altitude and adjusting point sizes.
  * - Centers the object in the viewport smoothly using GSAP animations.
+ * - Filters point clouds based on altitude range.  
  */
 export default class ThreeDViewHandler {
     
@@ -61,6 +62,7 @@ export default class ThreeDViewHandler {
         window.addEventListener("resize", this.handleResize);
     };
 
+    //Loads the point cloud data and processes it for rendering in the scene.
     loadPointClouds() {
         if (!this.pointCloudData) return;
 
@@ -96,18 +98,21 @@ export default class ThreeDViewHandler {
         });
     };
 
+    //Animation loop for rendering the scene and updating controls.
     animate() {
         requestAnimationFrame(() => this.animate());
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
     };
 
+    //Handles window resizing to update renderer size and camera aspect ratio.
     onResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
     };
 
+    //Updates the point size in all point clouds.
     updatePointSize(size) {
         this.pointClouds.forEach(pointCloud => {
             if (pointCloud.material.size !== size) {
@@ -117,6 +122,9 @@ export default class ThreeDViewHandler {
         });
     };
 
+    //#region Altitude Filter
+
+    //Toggles coloring of points based on their altitude (Z value).
     toggleColorByAltitude(enable) {
         this.pointClouds.forEach((pointCloud, index) => {
             const positions = pointCloud.geometry.attributes.position.array;
@@ -143,13 +151,38 @@ export default class ThreeDViewHandler {
         });
     };
 
+    //Sets the altitude range for filtering the point cloud based on Z values.
+    setAltitudeRange(minAltitude, maxAltitude) {
+        this.minAltitude = minAltitude;
+        this.maxAltitude = maxAltitude;
+        this.applyAltitudeFilter();
+    };
+
+    //Applies the altitude filter by hiding points outside of the specified range.
+    applyAltitudeFilter() {
+        this.pointClouds.forEach((pointCloud) => {
+            const positions = pointCloud.geometry.attributes.position.array;
+            const colors = pointCloud.geometry.attributes.color.array;
+
+            for (let i = 0; i < positions.length; i += 3) {
+                const z = positions[i + 2];
+                const shouldInclude = z >= this.minAltitude && z <= this.maxAltitude;
+                if (!shouldInclude) {
+                    // Make points outside of the range transparent
+                    colors[i] = colors[i + 1] = colors[i + 2] = 0; // Or set to a different color
+                }
+            }
+
+            pointCloud.geometry.attributes.color.needsUpdate = true;
+        });
+    };
+    //#endregion
+
+    //Centers the object in the viewport using GSAP animations.
     centerObject() {
-        console.trace("po");
-        if (!this.pointClouds.length) {
-            console.log("No point clouds found");  // Log this case
-            return;
-        }
-        console.log("op");
+        
+        if (!this.pointClouds.length) return;
+
         // Compute bounding box of all point clouds
         const boundingBox = new THREE.Box3().setFromObject(this.pointClouds[0]);
         this.pointClouds.forEach(pc => boundingBox.expandByObject(pc));
@@ -158,22 +191,13 @@ export default class ThreeDViewHandler {
         const center = boundingBox.getCenter(new THREE.Vector3());
         const size = boundingBox.getSize(new THREE.Vector3());
         const maxDimension = Math.max(size.x, size.y, size.z);
-    
-        // Debugging log
-        console.log('Center:', center);
-        console.log('Bounding Box Size:', size);
-        console.log('Max Dimension:', maxDimension);
-    
+     
         // Camera positioning logic
         const distance = maxDimension * 2;
         const cameraPosition = new THREE.Vector3(center.x, center.y, center.z + distance);
     
         // Dynamic offset based on size or other logic
         const offsetX = maxDimension * 1.5;  // Try smaller dynamic offset for closer zoom
-    
-        // Debugging the camera position
-        console.log('Camera Position:', cameraPosition);
-        console.log('Controls Target:', this.controls.target);
     
         // Animate controls target and camera position with GSAP
         gsap.to(this.controls.target, {
@@ -192,7 +216,7 @@ export default class ThreeDViewHandler {
             ease: "power2.inOut",
             onUpdate: () => this.controls.update()  // Update controls during animation
         });
-    }
+    };
     
     // Cleanup method for switching between views
     dispose() {
@@ -215,5 +239,5 @@ export default class ThreeDViewHandler {
 
         // Remove event listeners
         window.removeEventListener("resize", this.handleResize);
-    }
-}
+    };
+};

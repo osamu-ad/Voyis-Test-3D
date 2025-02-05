@@ -10,6 +10,7 @@ A lightweight web-based application for visualizing 3D point cloud data with int
   - Color mapping based on altitude
   - Smooth camera controls with OrbitControls
   - GSAP-powered animations for view transitions
+  - Altitude filtering: Filter point clouds by specified altitude range
 
 - **2D GIS Integration**
   - Leaflet-based map visualization
@@ -17,6 +18,8 @@ A lightweight web-based application for visualizing 3D point cloud data with int
   - Custom marker icons
   - Interactive popups with metadata
   - Automatic view bounds adjustment
+  - Playback functionality: Play through GeoJSON data over time
+  - Tag filtering: Filter GeoJSON data by specific tags
 
 - **File Management**
   - Support for multiple file formats (.xyz, .pcd, .geojson)
@@ -37,6 +40,7 @@ Voyis-Test-3D/
 │   └── main-css/
 │       ├── DataInput.css
 │       ├── DataViewer.css
+│       ├── 2DViewHandler.css
 │       └── MainPage.css
 ```
 
@@ -54,6 +58,8 @@ Main visualization controller that:
 - Manages switching between 3D and 2D views
 - Provides UI controls for visualization parameters
 - Coordinates data flow between input and view handlers
+- Includes tag filtering and playback of GeoJSON data
+- Includes controls for altitude filtering and playback functionality
 
 ### 3DViewHandler
 Three.js-based point cloud visualization:
