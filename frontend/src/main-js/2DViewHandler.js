@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -21,7 +23,7 @@ const GISViewer = ({ geoJsonData, addLog }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedTag, setSelectedTag] = useState("All");
-
+    
   // Initialize Leaflet map when component is mounted
   useEffect(() => {
       // Initialize map with world view
