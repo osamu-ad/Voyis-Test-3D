@@ -22,6 +22,7 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileMetadata, setFileMetadata] = useState({});
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const allowedFiles = ['xyz', 'pcd', 'geojson'];
   
   //Parse Point Cloud Data
@@ -112,13 +113,13 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
           resolve(true);
         } catch (error) {
           console.error("GeoJSON validation error:", error);
-          alert(`Invalid GeoJSON file (${file.name}): ${error.message}`);
+          setErrorMessage(`Invalid GeoJSON file (${file.name}): ${error.message}`);
           resolve(false);
         }
       };
   
       reader.onerror = () => {
-        alert(`Error reading file: ${file.name}`);
+        setErrorMessage(`Error reading file: ${file.name}`);
         resolve(false);
       };
   
@@ -160,8 +161,7 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
           loader.parse(event.target.result); // Throws error if invalid
           resolve(true);
         } catch (error) {
-          console.error("Invalid PCD file:", error);
-          alert(`Invalid PCD file: ${file.name}`);
+          setErrorMessage(`Invalid PCD file: ${file.name}`);
           resolve(false);
         }
       };
@@ -169,18 +169,52 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
       reader.readAsArrayBuffer(file);
     });
   };
+
+  const validateFileCombination = (newFiles) => {
+    const existingFiles = uploadedFiles.filter(f => f);
+    const allFiles = [...existingFiles, ...newFiles];
+    
+    const geoJsonCount = allFiles.filter(f => f.type === 'geojson').length;
+    const pointCloudCount = allFiles.filter(f => ['xyz', 'pcd'].includes(f.type)).length;
+
+    if (geoJsonCount > 1) {
+      setErrorMessage('Only one GeoJSON file is allowed');
+      return false;
+    }
+
+    if (pointCloudCount > 1) {
+      setErrorMessage('Only one point cloud file (XYZ or PCD) is allowed');
+      return false;
+    }
+
+    return true;
+  };
   //#endregion
   
   //Handle file upload and parse details
   const handleFileUpload = async (event) => {
+    setErrorMessage('');
     const files = Array.from(event.target.files);
     setLoading(true);
+
     // Check for duplicates first
     const duplicateFiles = files.filter(file => 
       uploadedFiles.some(existingFile => existingFile.name === file.name)
     );
 
-    if (duplicateFiles.length > 0) alert(`These files have already been uploaded: ${duplicateFiles.map(f => f.name).join(', ')}`);
+    if (duplicateFiles.length > 0) setErrorMessage(`These files have already been uploaded: ${duplicateFiles.map(f => f.name).join(', ')}`);
+    
+    //Checks for Multiple of Same File Types
+    const fileMultiple = files.map(file => ({
+      name: file.name,
+      size: (file.size / 1024).toFixed(2) + " KB",
+      type: file.name.split(".").pop(),
+    }));
+
+    if (!validateFileCombination(fileMultiple)) {
+      setLoading(false);
+      return;
+    }
 
     const newPointCloudData = [];
     const fileDetails = await Promise.all(files.map(async (file) => {
@@ -192,17 +226,17 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
       
       try {
         if (!allowedFiles.includes(fileInfo.type)){
-          alert(`Invalid file type: ${file.name}. Only .xyz, .pcd, and .geojson files are allowed.`);
+          setErrorMessage(`Invalid file type: ${file.name}. Only .xyz, .pcd, and .geojson files are allowed.`);
           return false;
         }
         //#region Basic Checks
         if (file.size === 0) {
-          alert(`File is empty: ${fileInfo.name}.`);
+          setErrorMessage(`File is empty: ${fileInfo.name}.`);
           return false;
         }
 
         if (file.size > MAX_FILE_SIZE) {
-          alert(`${file.name} exceeds the ${MAX_FILE_SIZE/1024/1024} MB size limit.`);
+          setErrorMessage(`${file.name} exceeds the ${MAX_FILE_SIZE/1024/1024} MB size limit.`);
           return false;
         }
 
@@ -220,7 +254,7 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
         if (fileInfo.type === 'xyz') {
           const isValid = await validateXYZFile(file);
           if (!isValid) {
-            alert(`Invalid XYZ file: ${file.name}`);
+            setErrorMessage(`Invalid XYZ file: ${file.name}`);
             return false;
           } 
         }
@@ -239,6 +273,7 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
         }    
       } catch (error) {
         console.error("Error parsing point cloud file:", error);
+        setErrorMessage(`Error processing ${file.name}: ${error.message}`);
       }
       return fileInfo;
     }));
@@ -294,6 +329,11 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
           />
         </label>
         <p>Files Must Be Under {MAX_FILE_SIZE/1024/1024} MB & .xyz, .pcd, or .geojson!</p>
+        {errorMessage && (
+          <div className="error-text">
+            {errorMessage}
+          </div>
+        )}
       </div>
       <div className="uploaded-files">
         <h3 className="text-lg font-semibold">Uploaded Files:</h3>

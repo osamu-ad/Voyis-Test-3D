@@ -89,6 +89,16 @@
     color: white;
   }
 
+  /* Error Text Styling */
+  .error-text {
+    color: #ff4500;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 8px;
+    background-color: rgba(255, 69, 0, 0.1);
+    border-radius: 5px;
+  }
+
   .loading-ellipsis {
     font-size: 1.2rem;
     font-weight: bold;
