@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Voyis-Test-3D/static/css/main.b45f5cc6.css",
+    "main.css": "/Voyis-Test-3D/static/css/main.31b7afa8.css",
     "main.js": "/Voyis-Test-3D/static/js/main.693a4285.js",
     "static/js/488.e75445ad.chunk.js": "/Voyis-Test-3D/static/js/488.e75445ad.chunk.js",
     "static/media/Trend-Sans-One-Regular.ttf": "/Voyis-Test-3D/static/media/Trend-Sans-One-Regular.0c74634cac0f2a5bffbe.ttf",
     "static/media/FontsFree-Net-Trend-Sans-W00-Five.ttf": "/Voyis-Test-3D/static/media/FontsFree-Net-Trend-Sans-W00-Five.abbca35672dd3cd33550.ttf",
     "static/media/voyis-logo.png": "/Voyis-Test-3D/static/media/voyis-logo.a67bd9d4128e21154cc9.png",
     "index.html": "/Voyis-Test-3D/index.html",
-    "main.b45f5cc6.css.map": "/Voyis-Test-3D/static/css/main.b45f5cc6.css.map",
+    "main.31b7afa8.css.map": "/Voyis-Test-3D/static/css/main.31b7afa8.css.map",
     "main.693a4285.js.map": "/Voyis-Test-3D/static/js/main.693a4285.js.map",
     "488.e75445ad.chunk.js.map": "/Voyis-Test-3D/static/js/488.e75445ad.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b45f5cc6.css",
+    "static/css/main.31b7afa8.css",
     "static/js/main.693a4285.js"
   ]
 }
