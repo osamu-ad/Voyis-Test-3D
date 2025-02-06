@@ -7,18 +7,21 @@
 
 .data-viewer-container {
   width: 48vw;
+  max-width: 1400px;
   height: calc(100vh - 320px);
   background-color: #480a5f;
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  margin-left: -305px;
-  margin-top: 200px;
   position: relative;
+  left: 15%;
+  transform: translateX(-50%); /* Centers it */
+  margin-top: 200px;
 }
+
 
 .viewer-content {
   height: 100%;
-   background: linear-gradient(90deg, #4d6ec8c6, #d66363);
+  background: linear-gradient(90deg, #4d6ec8c6, #d66363);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -105,6 +108,22 @@
 }
 
 /* Responsive Styles */
+@media (max-width: 1300px) {
+  .data-viewer-container {
+      width: 80vw;
+      left:50%;
+      margin-top: 850px; /* Push down below Data Input */
+  }
+}
+
+@media (max-width: 1200px) {
+  .data-viewer-container {
+      width: 80vw;
+      margin-left: 0;
+      margin-top: 850px; /* Push down below Data Input */
+  }
+}
+
 @media (max-width: 1024px) {
   .data-viewer-container {
       width: 80vw;
@@ -121,6 +140,7 @@
   .data-viewer-container {
       width: 90vw;
       height: calc(100vh - 200px);
+      left:65%;
       margin-top: 820px; /* Increase margin to ensure space below Data Input */
   }
   .control-panel {
@@ -151,5 +171,28 @@
   }
 }
 
+@media (max-width: 480px) {
+  .data-viewer-container {
+    width: 90vw;
+    height: calc(100vh - 130px);
+    margin-top: 700px;
+  }
 
+  .control-panel {
+    width: 100%;
+    flex-direction: row;
+    bottom: 100%;
+    height: auto;
+    padding: 8px;
+  }
+
+  .control-panel button {
+    font-size: 9px;
+    padding: 5px 10px;
+  }
+
+  .control-panel input[type="range"] {
+    width: 70px;
+  }
+}
   

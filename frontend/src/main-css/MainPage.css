@@ -155,6 +155,38 @@ html, body {
   }
 }
 
+@media screen and (max-width: 390px) {
+  .main-wrapper {
+    flex-direction: column; /* Stack content vertically */
+  }
 
+  .content-wrapper {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .main-content {
+    padding: 35px 15px;
+    width: 85%;
+  }
+
+  .tagline {
+    font-size: clamp(28px, 6vw, 45px); /* Adjusted size for smaller screens */
+  }
+
+  .subtitle {
+    font-size: clamp(0.8rem, 2.3vw, 1.1rem); /* Adjusted size */
+  }
+
+  .header {
+    flex-direction: column;
+    padding: 12px 0;
+  }
+
+  .header img {
+    height: 90px; /* Smaller logo for iPhone 12 Pro */
+  }
+}
 
 

@@ -125,5 +125,24 @@ select:hover {
     }
 }
 
-
+@media (max-width: 390px) {
+    .controls {
+      flex-direction: column; /* Stack the controls vertically */
+      gap: 8px; /* Further reduce gap between elements */
+    }
+  
+    select {
+      font-size: 12px; /* Smaller font */
+      padding: 6px; /* Reduced padding */
+    }
+  
+    .custom-button {
+      font-size: 0.8rem; /* Even smaller text on buttons */
+      padding: 6px 18px; /* Adjust button padding */
+    }
+  
+    #map {
+      height: 250px; /* Further reduce map height */
+    }
+  }
 

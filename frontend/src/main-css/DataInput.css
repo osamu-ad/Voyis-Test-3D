@@ -228,5 +228,25 @@
   }
 }
 
+@media screen and (max-width: 390px) {
+  .data-input {
+    top: 220px;
+    right: 0;
+    transform: none;
+    width: calc(100% - 20px);
+    padding: 8px;
+  }
 
+  .custom-upload-button {
+    font-size: 1.4rem;
+    padding: 7px 14px;
+    border-radius: 18px;
+  }
+
+  .uploaded-files {
+    margin-left: 0;
+    font-size: 1.1rem;
+    max-height: 180px;
+  }
+}
 
