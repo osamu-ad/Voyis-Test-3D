@@ -18,8 +18,7 @@ import "../main-css/DataInput.css";
 const MAX_FILE_SIZE = 250 * 1024 * 1024; // 250 MB
 
 const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
-  // State to store uploaded file
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]); // State to store uploaded file
   const [fileMetadata, setFileMetadata] = useState({});
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -48,7 +47,7 @@ const DataInput = ({ setPointCloudData, setGeoJsonData }) => {
             boundingBox: geometry.boundingBox
           });
         }
-        // Basic parsing for .pcd files would require more complex parsing
+        // Basic parsing for .pcd files
         else if (file.name.endsWith('.pcd')) {
           // Handle .pcd files using three-pcd-loader
           const url = URL.createObjectURL(file); // Create a temporary URL for the file

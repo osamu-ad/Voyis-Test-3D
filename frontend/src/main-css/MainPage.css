@@ -18,9 +18,9 @@ html, body {
   
   .content-wrapper {
     display: flex;
-    flex-direction: row; /* Side-by-side layout */
+    flex-direction: row; 
     gap: 20px;
-    justify-content: center; /* Center content horizontally */
+    justify-content: center; 
     align-items: center;
     width: 100%;
     flex-grow: 1;
@@ -29,10 +29,10 @@ html, body {
   
   .main-content {
     position: relative;
-    text-align: center; /* Center text */
+    text-align: center;
     padding: 80px 80px;
     color: #ffffff;
-    width: calc(100% - min(550px, 30%)); /* Adjust width for content */
+    width: calc(100% - min(550px, 30%)); 
     box-sizing: border-box;
   }
   
@@ -56,22 +56,22 @@ html, body {
   .header {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the text and logo horizontally */
-    position: absolute; /* Position it at the top of the page */
+    justify-content: center; 
+    position: absolute; 
     top: 0;
     width: 100%;
     padding: 20px 0;
   }
   
   .header img {
-    height: 130px; /* Adjust as needed */
+    height: 130px; 
     width: auto;
     margin-top: 15px;
-    margin-left: 10px; /* Space between logo and text */
+    margin-left: 10px; 
   }
   
   .header .header-text {
-    text-align: center; /* Ensures the text is centered */
+    text-align: center; 
   }
   
 
@@ -96,26 +96,26 @@ html, body {
 /* Tablets (max-width: 1024px) */
 @media screen and (max-width: 1024px) {
   .content-wrapper {
-    flex-direction: column; /* Stack content */
-    gap: 15px; /* Slightly smaller spacing */
+    flex-direction: column; 
+    gap: 15px; 
     align-items: center;
   }
 
   .main-content {
-    padding: 60px 30px; /* Adjust padding for tablets */
-    width: 80%; /* Reduce width slightly */
+    padding: 60px 30px; 
+    width: 80%; 
   }
 
   .tagline {
-    font-size: clamp(35px, 7vw, 80px); /* Slightly smaller font */
+    font-size: clamp(35px, 7vw, 80px);
   }
 
   .subtitle {
-    font-size: clamp(1rem, 2.8vw, 1.5rem); /* Adjust subtitle size */
+    font-size: clamp(1rem, 2.8vw, 1.5rem); 
   }
 
   .header img {
-    height: 130px; /* Scale logo for tablets */
+    height: 130px; 
   }
 
 }
@@ -123,41 +123,41 @@ html, body {
   /* Mobile devices (max-width: 600px) */
 @media screen and (max-width: 600px) {
   .main-wrapper {
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column; 
   }
 
   .content-wrapper {
-    flex-direction: column; /* Stack content vertically */
-    gap: 10px; /* Reduce spacing */
-    align-items: center; /* Center content on smaller screens */
+    flex-direction: column; 
+    gap: 10px; 
+    align-items: center; 
   }
 
   .main-content {
-    padding: 40px 20px; /* Reduce padding */
-    width: 90%; /* Make content more flexible */
+    padding: 40px 20px; 
+    width: 90%; 
   }
 
   .tagline {
-    font-size: clamp(30px, 6vw, 50px); /* Smaller font for mobile */
+    font-size: clamp(30px, 6vw, 50px); 
   }
 
   .subtitle {
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem); /* Adjust font size for readability */
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem); 
   }
 
   .header {
-    flex-direction: column; /* Stack logo and text */
+    flex-direction: column; 
     padding: 15px 0;
   }
 
   .header img {
-    height: 100px; /* Smaller logo for mobile */
+    height: 100px; 
   }
 }
 
 @media screen and (max-width: 390px) {
   .main-wrapper {
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column; 
   }
 
   .content-wrapper {
@@ -172,11 +172,11 @@ html, body {
   }
 
   .tagline {
-    font-size: clamp(28px, 6vw, 45px); /* Adjusted size for smaller screens */
+    font-size: clamp(28px, 6vw, 45px); 
   }
 
   .subtitle {
-    font-size: clamp(0.8rem, 2.3vw, 1.1rem); /* Adjusted size */
+    font-size: clamp(0.8rem, 2.3vw, 1.1rem); 
   }
 
   .header {
@@ -185,7 +185,7 @@ html, body {
   }
 
   .header img {
-    height: 90px; /* Smaller logo for iPhone 12 Pro */
+    height: 90px; 
   }
 }
 

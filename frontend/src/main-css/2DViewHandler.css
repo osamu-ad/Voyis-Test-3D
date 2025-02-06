@@ -1,4 +1,3 @@
-/* GISViewer.css */
 .controls {
     align-items: center;
     gap: 15px;
@@ -61,45 +60,45 @@ select:hover {
     overflow: hidden;
 }
 
-/* Large screens (e.g., desktops) */
+/* Large screens */
 @media (min-width: 1025px) {
     .controls {
-        gap: 15px; /* Default gap for large screens */
+        gap: 15px; 
     }
 
     select {
-        font-size: 16px; /* Default font size for select input */
-        padding: 10px; /* Default padding for select input */
+        font-size: 16px; 
+        padding: 10px; 
     }
 
     .custom-button {
         font-size: 1rem;
-        padding: 10px 25px; /* Default button padding */
+        padding: 10px 25px; 
     }
 
     #map {
-        height: 500px; /* Default map height */
+        height: 500px; 
     }
 }
 
 /* Medium screens (e.g., tablets) */
 @media (min-width: 601px) and (max-width: 1024px) {
     .controls {
-        gap: 12px; /* Adjust gap for tablets */
+        gap: 12px; 
     }
 
     select {
-        font-size: 15px; /* Slightly smaller font */
-        padding: 9px; /* Slightly reduce padding */
+        font-size: 15px; 
+        padding: 9px; 
     }
 
     .custom-button {
         font-size: 1rem;
-        padding: 9px 22px; /* Adjust button padding */
+        padding: 9px 22px; 
     }
 
     #map {
-        height: 400px; /* Adjust map height for medium screens */
+        height: 400px; 
     }
 }
 
@@ -111,38 +110,38 @@ select:hover {
     }
 
     select {
-        font-size: 14px; /* Make the font smaller */
-        padding: 8px; /* Reduce padding */
+        font-size: 14px; 
+        padding: 8px; 
     }
 
     .custom-button {
-        font-size: 0.9rem; /* Smaller text on buttons */
-        padding: 8px 20px; /* Adjust button padding */
+        font-size: 0.9rem; 
+        padding: 8px 20px; 
     }
 
     #map {
-        height: 300px; /* Reduce map height for smaller screens */
+        height: 300px; 
     }
 }
 
 @media (max-width: 390px) {
     .controls {
-      flex-direction: column; /* Stack the controls vertically */
-      gap: 8px; /* Further reduce gap between elements */
+      flex-direction: column; 
+      gap: 8px; 
     }
   
     select {
-      font-size: 12px; /* Smaller font */
-      padding: 6px; /* Reduced padding */
+      font-size: 12px; 
+      padding: 6px; 
     }
   
     .custom-button {
-      font-size: 0.8rem; /* Even smaller text on buttons */
-      padding: 6px 18px; /* Adjust button padding */
+      font-size: 0.8rem; 
+      padding: 6px 18px; 
     }
   
     #map {
-      height: 250px; /* Further reduce map height */
+      height: 250px; 
     }
   }
 

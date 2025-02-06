@@ -36,28 +36,28 @@ export default class ThreeDViewHandler {
     init() {
         if (!this.canvas) return;
 
-        // Create Scene
+        //Create Scene
         this.scene = new THREE.Scene();
 
-        // Create Camera
+        //Create Camera
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.camera.position.z = 5;
 
-        // Create Renderer
+        //Create Renderer
         this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: false });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(1);
 
-        // Create Orbit Controls
+        //Create Orbit Controls
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-        // Load Point Cloud Data
+        //Load Point Cloud Data
         this.loadPointClouds();
 
-        // Start Animation Loop
+        //Start Animation Loop
         this.animate();
 
-        // Handle Resize
+        //Handle Resize
         this.handleResize = _.debounce(() => this.onResize(), 250);
         window.addEventListener("resize", this.handleResize);
     };
@@ -71,7 +71,7 @@ export default class ThreeDViewHandler {
             const colors = new Float32Array(data.points.length * 3);
             let minZ = Infinity, maxZ = -Infinity;
 
-            // Process each point and extract position data
+            //Process each point and extract position data
             data.points.forEach((point, i) => {
                 const baseIndex = i * 3;
                 positions[baseIndex] = point.x;
@@ -84,12 +84,12 @@ export default class ThreeDViewHandler {
             this.zRange[index] = { minZ, maxZ };
             colors.fill(1);
 
-            // Create a buffer geometry and assign position & color attributes
+            //Create a buffer geometry and assign position & color attributes
             const geometry = new THREE.BufferGeometry();
             geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
             geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
 
-            // Create a material for the point cloud
+            //Create a material for the point cloud
             const material = new THREE.PointsMaterial({ size: 0.05, vertexColors: true, sizeAttenuation: true });
             const pointCloud = new THREE.Points(geometry, material);
             this.scene.add(pointCloud);

@@ -103,7 +103,7 @@ const GISViewer = ({ geoJsonData, addLog }) => {
         },
         onEachFeature: (feature, layer) => {
             if (feature.properties) {
-              // Construct popup content with feature properties
+                // Construct popup content with feature properties
                 let popupContent = `<b>Coordinates:</b> ${feature.geometry.coordinates.join(", ")}<br/>`;
                 Object.keys(feature.properties).forEach(key => {
                     popupContent += `<b>${key}:</b> ${feature.properties[key]}<br/>`;

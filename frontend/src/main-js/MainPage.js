@@ -7,7 +7,7 @@ import voyisLogo from "../assets/voyis-logo.png";
 
 /**
  * MainPage Component
- * The main entry point for the application UI, hosting other components like DataInput.
+ * The main entry point for the application UI, hosting other components like DataInput & DataViewer.
  */
 const MainPage = () => {
   const [pointCloudData, setPointCloudData] = useState([]);
